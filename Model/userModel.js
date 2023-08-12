@@ -24,18 +24,19 @@ const get = async () => {
     });
 };
 
+const md5 = require("md5");
+
 // Função para realizar o login do usuário
 const login = async (data) => {
     const { email, senha } = data;
-
     return new Promise((resolve, reject) => {
         const sql =
-        "SELECT u.id_usuario as id, u.nome, u.email, u.perfil, u.tipo_id_tipo, t.descricao AS tipo_descricao " +
-        "FROM usuario u " +
-        "JOIN tipo t ON t.id_tipo = u.tipo_id_tipo " +
-        "WHERE u.email = ? AND u.senha = ?";
+        `SELECT u.id_usuario as id, u.nome, u.email, u.perfil, u.tipo_id_tipo, t.descricao AS tipo_descricao ` +
+        `FROM usuario u ` +
+        `JOIN tipo t ON t.id_tipo = u.tipo_id_tipo ` +
+        `WHERE u.email = ? AND u.senha= ?`;
 
-        connection.query(sql, [email, senha], (error, results) => {
+        connection.query(sql, [email, md5(senha)], (error, results) => {
             if (error) {
                 reject(error);
             } else {

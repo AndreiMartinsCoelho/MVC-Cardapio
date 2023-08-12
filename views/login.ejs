@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="row container-login test">
+        <div class="col-sm-auto">
+          <div class="container-logo">
+            <img src="/images/Captura de tela_20230812_155856.png" alt="Logo" class="logo">
+          </div>
+          <div class="logo-text">
+            <h1 class="logo-text">Bem vindo ao Site de cadastros de cardaios</h1>
+          </div>
+            <form id="login-form" action="/user/login" method="post">
+                <div class="mb-3" id="email">
+                  <label for="exampleInputEmail1" for="email" class="form-label">Endereço de Email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" action="/user/login" name="email" method="post">
+                  <div id="emailHelp" class="form-text"><p>Nunca compartilharemos seu e-mail com mais ninguém</p></div>
+                </div>
+                <div class="mb-3" id="senha">
+                  <label for="exampleInputPassword1" class="form-label">Senha</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" action="/user/login" name="senha" method="post">
+                </div>
+                <div class="mb-3 form-check container-senha" id="verSenha">
+                  <input type="checkbox" class="form-check-input check-senha" id="exampleCheck1">
+                  <label class="form-check-label labelSenha" for="exampleCheck1">Ver minha senha</label>
+                  <a href="#" class="esqueceuSenha">Esqueceu a senha?</a>
+                </div>
+                <button type="submit" class="btn btn-login" action="/user/login" value="login" method="post">ENTRAR</button>
+            </form>
+            <div id="cadastro">
+              <p>Não tem uma conta? <a href="/user/cadastro">Cadastre-se</a></p>
+            </div>
+        </div>
+    </div>
+</div>

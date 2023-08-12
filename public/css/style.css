@@ -1,0 +1,113 @@
+*{
+    margin: 0!;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-login{
+    border: none!important;
+    outline: none!important;
+    background-color: red!important;
+    color: white!important;
+    padding: 10px 20px!important;
+    border-radius: 8px!important;
+    cursor: pointer!important;
+    font-size: 14pt!important;
+    font-weight: bolder!important;
+    width: 100%!important;
+}
+
+.form-control {
+    border-color: black!important;
+    border: solid 2px!important;
+    border-radius: 8px!important;
+    font-size: 14pt!important;
+    font-weight: 600!important;
+}
+
+.form-label{
+    font-size: 10pt!important;
+    font-weight: bolder!important;
+    color: black!important;
+}
+
+.form-text{
+    font-size: 11pt!important;
+    font-weight: 500!important;
+    color:rgb(87, 87, 87)!important;
+}
+
+.container-login{
+    justify-content: center!important;
+    align-items: center!important;
+}
+
+.check-senha{
+    cursor: pointer!important;
+    position: relative!important;
+    border: solid 2px red!important;
+    border-radius: 30px!important;
+    width: 25px!important;
+    height: 25px!important;
+}
+
+.container-senha{
+    justify-content:space-around!important;
+    display: flex!important;
+}
+
+.labelSenha{
+    padding: 7px 6px!important;
+    align-items: center!important;
+    color: red!important;
+    font-size: 10pt!important;
+    font-weight: bolder!important;
+    width: 60%!important;
+}
+
+.esqueceuSenha{
+    text-decoration: none!important;
+    color: red!important;
+    font-size: 10pt!important;
+    font-weight: bolder!important;
+    padding: 7px 0!important;
+    text-align: center!important;
+    width: 40%!important;
+    text-align: end!important;
+}
+
+.check-senha:checked{
+    background-color: red !important;
+}
+
+.container-logo{
+    width: 100%!important;
+    margin: 0 auto!important;
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+}
+
+.logo-text{
+    font-size: 20pt!important;
+    font-weight: bolder!important;
+    color: red!important;
+    padding: 10px!important;
+    text-align: center!important;
+    width: 100%!important;
+}
+
+.logo{
+    width: 200px!important;
+    height: 200px!important;
+}
+
+#cadastro{
+    text-decoration: none!important;
+    color: black!important;
+    font-size: 10pt!important;
+    font-weight: bolder!important;
+    padding: 7px 0!important;
+    width: 100%!important;
+}
