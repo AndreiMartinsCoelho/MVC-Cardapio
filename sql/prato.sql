@@ -20,12 +20,6 @@ USE `mydb` ;
 -- -----------------------------------------------------
 -- Table `mydb`.`tipo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tipo` (
-  `id_tipo` INT NOT NULL,
-  `descricao` VARCHAR(100) NULL,
-  PRIMARY KEY (`id_tipo`))
-ENGINE = InnoDB;
-
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
@@ -35,13 +29,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
   `email` VARCHAR(150) NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `perfil` VARCHAR(130) NOT NULL,
-  `tipo_id_tipo` INT NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  INDEX `fk_usuario_tipo1_idx` (`tipo_id_tipo` ASC),
-    FOREIGN KEY (`tipo_id_tipo`)
-    REFERENCES `mydb`.`tipo` (`id_tipo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------

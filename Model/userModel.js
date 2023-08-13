@@ -31,10 +31,9 @@ const login = async (data) => {
     const { email, senha } = data;
     return new Promise((resolve, reject) => {
         const sql =
-        `SELECT u.id_usuario as id, u.nome, u.email, u.perfil, u.tipo_id_tipo, t.descricao AS tipo_descricao ` +
-        `FROM usuario u ` +
-        `JOIN tipo t ON t.id_tipo = u.tipo_id_tipo ` +
-        `WHERE u.email = ? AND u.senha= ?`;
+        `SELECT u.id_usuario as id, u.nome, u.email, u.perfil ` +
+        `FROM usuario u `+
+        `WHERE u.email = ? AND u.senha = ?`;
 
         connection.query(sql, [email, md5(senha)], (error, results) => {
             if (error) {
@@ -43,16 +42,11 @@ const login = async (data) => {
                 let result = null;
                 if (results && results.length > 0) {
                     const id = results[0].id;
-                    const token = jwt.sign({ id }, "mydb", { expiresIn: "3h" });
+                    const token = jwt.sign({ id }, "mydb", { expiresIn: "4h" });
 
                     console.log("Fez login e gerou token!");
 
-                    const tipo = {
-                        id_tipo: results[0].tipo_id_tipo,
-                        descricao: results[0].tipo_descricao
-                    };
-
-                    result = { auth: true, token, user: results[0], tipo };
+                    result = { auth: true, token, user: results[0]};
                     resolve(result);
                 } else {
                     result = { auth: false, message: "Credenciais inválidas" };

@@ -1,64 +1,84 @@
 function loginUser(email, senha) {
-    const requestData = {
-        email: email,
-        senha: senha
-    };
+  const requestData = {
+    email: email,
+    senha: senha,
+  };
 
-    fetch("http://localhost:3000/user/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(requestData)
+  fetch("http://localhost:3000/user/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(requestData),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erro ao fazer login");
+      }
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Erro ao fazer login");
-        }
+    .then((responseData) => {
+      if (responseData.auth) {
+        localStorage.setItem("token", responseData.token);
+        localStorage.setItem("user", JSON.stringify(responseData.user));
+        
+        console.log("Token salvo com sucesso");
+        console.log(responseData);
+        window.location.href = "/ejs/home";
+      } else {
+        alert(responseData.message);
+      }
     })
-    .then(responseData => {
-        if (responseData.auth) {
-            console.log(responseData);
-        } else {
-            alert(responseData.message);
-        }
-    })
-    .catch(error => {
-        alert(error.message);
+    .catch((error) => {
+      alert(error.message);
     });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("login-form");
+  const loginForm = document.getElementById("login-form");
 
-    if (loginForm) {
-        loginForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Impede o envio tradicional do formulário
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Impede o envio tradicional do formulário
+      const emailInput = document.querySelector("#email input[type='email']");
+      const senhaInput = document.querySelector(
+        "#senha input[type='password']"
+      );
 
-            const emailInput = document.querySelector("#email input[type='email']");
-            const senhaInput = document.querySelector("#senha input[type='password']");
+      const email = emailInput.value;
+      const senha = senhaInput.value;
 
-            const email = emailInput.value;
-            const senha = senhaInput.value;
+      console.log("Email:", email);
+      console.log("Senha:", senha);
 
-            console.log("Email:", email);
-            console.log("Senha:", senha);
-
-            loginUser(email, senha);
-        });
-    }
+      loginUser(email, senha);
+    });
+  }
 });
 
-//Função para olhar a senha
-const verSenha = document.querySelector("#verSenha");
-const senha = document.querySelector("#senha input[type='password']");
-verSenha.addEventListener("click", function () {
-    if (senha.type === "password") {
-        senha.type = "text";
+ //redirecionar para a home
+ document.querySelector("#logarDireto").addEventListener("click", () => {
+    const token = localStorage.getItem("token");
+
+    // Verificar se o token é válido, se for válido, redirecionar para a home
+    if (token == null&& token == undefined) {
+      alert("Você não está logado");
+      window.location.href = "/ejs/login";
     } else {
-        senha.type = "password";
+      console.log("Token válido");
+      window.location.href = "/ejs/home";
     }
-});
+  });
+
+  const verSenha = document.querySelector("#verSenha");
+  const senhaInput = document.querySelector("#senha input[type='password']");
+  
+  verSenha.addEventListener("click", function () {
+    if (senhaInput.type === "password") {
+      senhaInput.type = "text";
+    } else {
+      senhaInput.type = "password";
+    }
+  });

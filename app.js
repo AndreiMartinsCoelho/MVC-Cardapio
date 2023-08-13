@@ -30,4 +30,7 @@ app.use('/ejs', ejsRoute);
 const welcomeRoute = require('./router/welcomeRouter');
 app.use('/ejs', welcomeRoute);
 
+const homeRoute = require('./router/homeRouter');
+app.use('/ejs', homeRoute);
+
 module.exports = app, express, expressLayouts, cors;
