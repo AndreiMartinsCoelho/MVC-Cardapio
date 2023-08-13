@@ -19,7 +19,6 @@ const{
 
 //rotas importantes para funcionar a aplicação
 const router = require('./router/route');
-
 app.use(router);
 
 const userRoute = require('./router/userRouter');
@@ -27,5 +26,8 @@ app.use('/user', userRoute);
 
 const ejsRoute = require('./router/EjsRouter');
 app.use('/ejs', ejsRoute);
+
+const welcomeRoute = require('./router/welcomeRouter');
+app.use('/ejs', welcomeRoute);
 
 module.exports = app, express, expressLayouts, cors;

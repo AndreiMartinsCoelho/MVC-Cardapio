@@ -90,7 +90,7 @@
 }
 
 .logo-text{
-    font-size: 20pt!important;
+    font-size: 17pt!important;
     font-weight: bolder!important;
     color: red!important;
     padding: 10px!important;
@@ -109,5 +109,40 @@
     font-size: 10pt!important;
     font-weight: bolder!important;
     padding: 7px 0!important;
+    width: 100%!important;
+}
+
+.container-welcome{
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    display: flex!important;
+}
+
+.btn-welcome{
+    border: none!important;
+    outline: none!important;
+    background-color: red!important;
+    color: white!important;
+    padding: 10px 20px!important;
+    border-radius: 8px!important;
+    cursor: pointer!important;
+    font-size: 14pt!important;
+    font-weight: bolder!important;
+    width: 100%!important;
+}
+
+.welcome{
+    width: 100%!important;
+    height: 50vh!important;
+    display:flex!important;
+    flex-direction: column-reverse!important;
+}
+
+.welcome p{
+    font-size: 9pt!important;
+    font-weight: bolder!important;
+    color: red!important;
+    padding: 3px!important; 
     width: 100%!important;
 }
