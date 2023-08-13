@@ -146,3 +146,76 @@
     padding: 3px!important; 
     width: 100%!important;
 }
+
+.navbar{
+    background-color: white!important;
+    border-bottom: solid 2px red!important;
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.navbar-brand{
+    margin: 0!important;
+}
+
+.navbar-brand a{
+    border-radius: 7px!important;
+    padding: 10px!important;
+    background-color: red!important;
+    text-decoration: none!important;
+    color: white!important;
+    font-size: 11pt!important;
+    font-weight:900!important;
+    text-align: center!important;
+    transition: background-color 0.3s, color 0.3s, border 0.3s, transform 0.5s, box-shadow 0.5s;
+}
+
+.navbar-brand a:hover {
+    background-color: white!important;
+    color: red!important;
+    border: 2px solid red;
+    border-radius: 7px;
+    transform: translate(0, -4px) scale(1.02); /* Efeito 3D e levantamento */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra tridimensional mais pronunciada */
+    transition: transform 0.5s, box-shadow 0.5s; /* Transições suaves */
+}
+
+.navbar-brand a:active {
+    background-color: darkred!important;
+    color: white!important;
+    border: 2px solid white;
+    border-style: double; /* Segunda borda 3D */
+    border-color: white;
+    transform: scale(0.95); /* Efeito de afundamento */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra tridimensional mais pronunciada */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transições suaves */
+}
+
+.navbar-brand img{
+    width: 100px!important;
+}
+
+.test1{
+    margin: 0!important;
+    padding: 0!important;
+}
+
+.neymar{
+    padding: 14px!important;
+    justify-content: center!important;
+    align-items: center!important;
+    display: flex!important;
+}
+
+.card-img-top{
+    width: 100%!important;
+    height: 100%!important;
+}
+
+.card-title{
+    font-size: 12pt!important;
+    font-weight: 900!important;
+    color: red!important;
+    padding: 10px!important;
+    text-align: center!important;
+}
