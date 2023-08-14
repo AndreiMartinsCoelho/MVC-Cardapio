@@ -31,9 +31,64 @@ function loginUser(email, senha) {
     })
     .catch((error) => {
       alert(error.message);
-    });
+  });
 }
 
+//Função para resetar a senha
+function resetPassword(email,novaSenha, confirmSenha) {
+  const requestData = {
+    email: email,
+    novaSenha: novaSenha,
+    confirmSenha: confirmSenha,
+};
+
+  fetch("http://localhost:3000/reset", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(requestData),
+  }).then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Erro ao resetar a senha");
+      }
+    }).then((responseData) => {
+      console.log(responseData);
+    }).catch((error) => {
+      alert(error.message);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const resetForm = document.getElementById("reset-form");
+  if (resetForm) {
+    resetForm.addEventListener("submit", function (event) {
+      event.preventDefault(); // Impede o envio tradicional do formulário
+
+      const emailInput = document.querySelector(".inputEmail3[type='email']");
+      console.log("Email Input:", emailInput);
+      const senhaInput = document.querySelector(".inputPassword3[type='password']");
+      console.log("Senha Input:", senhaInput);
+      const comfirmSenhaInput = document.querySelector(".confirmSenhaInput[type='password']");
+      console.log("Confirmação de Senha Input:", comfirmSenhaInput);
+
+      const email = emailInput.value;
+      const novaSenha = senhaInput.value;
+      const comfirmSenha = comfirmSenhaInput.value;
+
+      console.log("Email:", email);
+      console.log("Nova Senha:", novaSenha);
+      console.log("Confirmação de Senha:", comfirmSenha);
+
+      resetPassword(email, novaSenha, comfirmSenha);
+    });
+  }
+});
+
+  
 document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("login-form");
 

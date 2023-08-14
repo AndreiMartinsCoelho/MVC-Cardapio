@@ -36,4 +36,7 @@ app.use('/ejs', welcomeRoute);
 const homeRoute = require('./router/homeRouter');
 app.use('/ejs', homeRoute);
 
+const resetTela = require('./router/resetTela');
+app.use('/reset', resetTela);
+
 module.exports = app, express, expressLayouts, cors;
