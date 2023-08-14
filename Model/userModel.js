@@ -42,7 +42,7 @@ const login = async (data) => {
                 let result = null;
                 if (results && results.length > 0) {
                     const id = results[0].id;
-                    const token = jwt.sign({ id }, "mydb", { expiresIn: "4h" });
+                    const token = jwt.sign({ id }, "mydb", { expiresIn: "3000000" });
 
                     console.log("Fez login e gerou token!");
 

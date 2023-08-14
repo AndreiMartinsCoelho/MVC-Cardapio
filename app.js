@@ -24,6 +24,9 @@ app.use(router);
 const userRoute = require('./router/userRouter');
 app.use('/user', userRoute);
 
+const reset = require('./router/resetSenha');
+app.use('/reset', reset);
+
 const ejsRoute = require('./router/EjsRouter');
 app.use('/ejs', ejsRoute);
 

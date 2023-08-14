@@ -11,15 +11,13 @@ function loginUser(email, senha) {
       Accept: "application/json",
     },
     body: JSON.stringify(requestData),
-  })
-    .then((response) => {
+  }).then((response) => {
       if (response.ok) {
         return response.json();
       } else {
         throw new Error("Erro ao fazer login");
       }
-    })
-    .then((responseData) => {
+    }).then((responseData) => {
       if (responseData.auth) {
         localStorage.setItem("token", responseData.token);
         localStorage.setItem("user", JSON.stringify(responseData.user));
