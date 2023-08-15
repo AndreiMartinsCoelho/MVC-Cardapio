@@ -1,37 +1,33 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 test1">
-            <form id="reset-form" action="/reset/tela" method="put">
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control inputEmail3" id="emailInput2 ">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Senha</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control inputPassword3"id="senhaInput2 ">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label"> Confirme a Senha</label>
-                    <div class="col-sm-10">
-                      <input type="password" class="form-control inputPassword3 confirmSenhaInput">
-                    </div>
-                  </div>
-                <div class="row mb-3">
-                  <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Ver senha
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary">RESETAR SENHA</button>
-            </form>
+  <div class="row container-login test">
+      <div class="col-sm-auto">
+        <div class="container-logo">
+          <img src="/images/Captura de tela_20230812_155856.png" alt="Logo" class="logo">
         </div>
-    </div>
+        <div class="logo-text">
+          <h1 class="logo-text">Esqueci a senha da minha conta</h1>                  
+        </div>
+          <form id="reset-form" action="/reset/tela" method="put">
+              <div class="mb-3" id="email">
+                <label for="exampleInputEmail1" for="email" class="form-label">Endereço de Email</label>
+                <input type="email" class="form-control inputEmail3" id="emailInput2" aria-describedby="emailHelp" >
+                <div id="emailHelp" class="form-text"><p>Nunca compartilharemos seu e-mail com mais ninguém</p></div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Senha Nova</label>
+                <input type="password" class="form-control inputPassword3 "id="senhaInput2">
+              </div>
+              <div class="mb-3" id="senha">
+                <label for="exampleInputPassword1" class="form-label">Confirme a Senha</label>
+                <input type="password" class="form-control inputPassword3 confirmSenhaInput "id="senhaInput2">
+              </div>
+              <div class="mb-3 form-check container-senha">
+                <input type="checkbox" class="form-check-input check-senha" id="verSenha">
+                <label class="form-check-label labelSenha" for="exampleCheck1">Ver minha senha</label>
+                <a href="/ejs/login" class="esqueceuSenha">Voltar a tela login?</a>
+              </div>
+              <button type="submit" class="btn btn-login">TROCAR SENHA</button>
+          </form>
+      </div>
+  </div>
 </div>

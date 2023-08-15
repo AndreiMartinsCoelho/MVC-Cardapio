@@ -50,14 +50,20 @@ function resetPassword(email,novaSenha, confirmSenha) {
     },
     body: JSON.stringify(requestData),
   }).then((response) => {
+    error = response;
       if (response.ok) {
+        alert("Senha resetada com sucesso");
+        window.location.href = "/ejs/login";
+
         return response.json();
       } else {
+        alert("Erro ao resetar a senha");
         throw new Error("Erro ao resetar a senha");
       }
     }).then((responseData) => {
       console.log(responseData);
     }).catch((error) => {
+      alert("Verifique as credenciais fornecidas");
       alert(error.message);
   });
 }
