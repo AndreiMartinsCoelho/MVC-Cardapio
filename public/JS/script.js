@@ -135,14 +135,22 @@ document.addEventListener("DOMContentLoaded", function () {
  //redirecionar para a home
  document.querySelector("#logarDireto").addEventListener("click", () => {
     const token = localStorage.getItem("token");
+    const MSGW = document.getElementById("MSGW");
 
     // Verificar se o token é válido, se for válido, redirecionar para a home
     if (token == null&& token == undefined) {
-      alert("Você não está logado");
-      window.location.href = "/ejs/login";
+      MSGW.innerHTML="Você não está logado!!!"
+        setTimeout(()=>{
+          window.location.href = "/ejs/login";
+          MSGW.style.display="none";
+        }, 2000)//2 segundos
     } else {
+      MSGW.innerHTML="Você está logado!!!"
+      setTimeout(()=>{
+        window.location.href = "/ejs/home";
+        MSGW.style.display="none";
+      }, 2000)//2 segundos
       console.log("Token válido");
-      window.location.href = "/ejs/home";
     }
   });
 
