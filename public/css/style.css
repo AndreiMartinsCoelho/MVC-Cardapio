@@ -220,7 +220,7 @@
     text-align: center!important;
 }
 
-.erroMSG{
+.erroMSG, #erroMENL, #erroMSEN{
     font-size: 16pt;
     font-weight: 900;
     color: red;

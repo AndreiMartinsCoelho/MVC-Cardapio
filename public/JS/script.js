@@ -17,17 +17,24 @@ function loginUser(email, senha) {
       } else {
         throw new Error("Erro ao fazer login");
       }
-    }).then((responseData) => {
-      if (responseData.auth) {
-        localStorage.setItem("token", responseData.token);
-        localStorage.setItem("user", JSON.stringify(responseData.user));
-        
-        console.log("Token salvo com sucesso");
+    }).then((responseData) => {       
+        const auten = responseData.auth;
+        const MSG2 = document.getElementById("erroMENL");
+        if(auten==false){
+          MSG2.innerHTML="Erro ao fazer login. Verifique as credenciais fornecidas."
+          setTimeout(()=>{
+            MSG2.style.display="none";
+          }, 2000)//2 segundos
+        }else{
+          localStorage.setItem("token", responseData.token);
+          localStorage.setItem("user", JSON.stringify(responseData.user));
+          MSG2.innerHTML="Login efetuado com sucesso e Token salvo com sucesso"
+          setTimeout(()=>{
+            window.location.href ="/ejs/home";
+            MSG2.style.display="none";
+          }, 1000)//1 segundos
+        }
         console.log(responseData);
-        window.location.href = "/ejs/home";
-      } else {
-        alert(responseData.message);
-      }
     })
     .catch((error) => {
       alert(error.message);
@@ -57,13 +64,18 @@ function resetPassword(email,novaSenha, confirmSenha) {
       }
     }).then((responseData) => {
       const Sucesso = responseData.success;
-      if(Sucesso==false){
-        const MSG = document.getElementById("erroMEN");
+      const MSG = document.getElementById("erroMEN");
+      if(Sucesso==false){ 
         MSG.innerHTML="Não foi possível alterar a senha. Verifique as credenciais fornecidas."
-        //alert("Não foi possível alterar a senha. Verifique as credenciais fornecidas.");
+        setTimeout(()=>{
+          MSG.style.display="none";
+        }, 2000)//2 segundos
       }else{
-        window.location.href = "/ejs/login";
-        alert("Senha alterada com Sucesso");
+        MSG.innerHTML="Senha da conta alterada com sucesso"
+        setTimeout(()=>{
+          window.location.href = "/ejs/login";
+          MSG.style.display="none";
+        }, 3000)//3 segundos
       }
       console.log("Teste",responseData);
     }).catch((error) => {
