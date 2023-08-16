@@ -130,6 +130,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+//redirecionar para a Welcome
+// document.querySelector("#fechaJS").addEventListener("click", () => {
+//   setTimeout(()=>{
+//     window.location.href = "/ejs/welcome";
+//   }, 2000)//2 segundos
+// });
+
  //redirecionar para a home
  document.querySelector("#logarDireto").addEventListener("click", () => {
     const token = localStorage.getItem("token");
