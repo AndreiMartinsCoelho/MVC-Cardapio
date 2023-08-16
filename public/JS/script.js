@@ -117,9 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loginForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Impede o envio tradicional do formulário
       const emailInput = document.querySelector("#email input[type='email']");
-      const senhaInput = document.querySelector(
-        "#senha input[type='password']"
-      );
+      const senhaInput = document.querySelector("#senha input[type='password']");
 
       const email = emailInput.value;
       const senha = senhaInput.value;

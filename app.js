@@ -39,4 +39,7 @@ app.use('/ejs', homeRoute);
 const resetTela = require('./router/resetTela');
 app.use('/reset', resetTela);
 
+const cadastroTela = require('./router/cadastroTelaRouter');
+app.use('/cadastro', cadastroTela);
+
 module.exports = app, express, expressLayouts, cors;
