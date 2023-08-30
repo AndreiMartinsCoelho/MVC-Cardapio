@@ -1,26 +1,35 @@
 const userModel = require("../Model/userModel");
 
-exports.get = async (headers) => {
-  let auth;
-  auth = await userModel.verifyJWT(
-    headers["x-access-token"],
-    headers["perfil"]
-  );
-  let users;
-  if (auth.auth) {
-    users = await userModel.get();
-    return { status: "success", auth, users };
-  } else {
-    return { status: "null", auth };
-  }
-};
+let users = [];
 
-exports.login = async (body, req) => {
-  const result = await userModel.login(body, req); // Passando o objeto "req"
-  if (result.auth) {
-    req.session.auth = result;
-    return { auth: true, token: result.token, user: result.user };
+function login(req, res) {
+  res.render('login');
+}
+
+async function auth(req, res) {
+  const resp = await userModel.login({
+    email: req.body.email,
+    senha: req.body.senha
+  });
+
+  console.log(resp);
+
+  if (resp.auth) {
+    req.session.usuario = {
+      id: resp.user.id,
+      email: resp.user.email
+    };
+    res.redirect('/tarefas');
   } else {
-    return { auth: false, message: "Credenciais inválidas" };
+    console.log('Usuário ou senha inválidos');
+    res.redirect('/login');
   }
-};
+}
+
+module.exports = { login, auth };
+
+
+// exports.logout = async (req, res) => {
+//   delete req.session.user();
+//   res.redirect("/ejs/home");
+// }
