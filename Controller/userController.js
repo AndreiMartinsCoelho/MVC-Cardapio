@@ -15,9 +15,10 @@ exports.get = async (headers) => {
   }
 };
 
-exports.login = async (body) => {
-  const result = await userModel.login(body);
+exports.login = async (body, req) => {
+  const result = await userModel.login(body, req); // Passando o objeto "req"
   if (result.auth) {
+    req.session.auth = result;
     return { auth: true, token: result.token, user: result.user };
   } else {
     return { auth: false, message: "Credenciais inválidas" };

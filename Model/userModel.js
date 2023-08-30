@@ -47,7 +47,7 @@ const login = async (data) => {
                     console.log("Fez login e gerou token!");
 
                     result = { auth: true, token, user: results[0]};
-                    resolve(result);
+                    resolve(result);                    
                 } else {
                     result = { auth: false, message: "Credenciais inválidas" };
                     resolve(result);

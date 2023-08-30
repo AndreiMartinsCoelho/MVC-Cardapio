@@ -8,8 +8,10 @@ userRouter.post('/', async (req, res, next) => {
 });
 
 userRouter.post('/login', async(req, res, next)=>{
-    user=await userController.login(req.body);
-    res.status(200).send(user);
+    const body = req.body;
+    const loginResult = await userController.login(body, req); // Passando o objeto "req"
+    res.json(loginResult);
+    res.redirect('/ejs/home');
 })
 
 module.exports = userRouter;

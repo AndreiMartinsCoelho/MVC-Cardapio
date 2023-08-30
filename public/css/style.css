@@ -149,7 +149,8 @@
 
 .navbar{
     background-color: white!important;
-    border-bottom: solid 2px red!important;
+    justify-content:space-between!important;
+    border-bottom: solid 2px black!important;
     margin: 0!important;
     padding: 0!important;
 }
@@ -226,4 +227,23 @@
     color: red;
     text-align: center;
     padding: 10px;
+}
+
+.deslogar{
+    text-decoration: none!important;
+    color: red!important;
+    font-size: 7pt!important;
+    font-weight: bolder!important;
+    padding: 9px!important;
+    text-align: center!important;
+    background-color: white;
+    border: none;
+}
+
+#userName{
+    font-size: 10pt!important;
+    font-weight: bolder!important;
+    color: black!important;
+    padding: 7px 0!important;
+    text-align: center!important;
 }
