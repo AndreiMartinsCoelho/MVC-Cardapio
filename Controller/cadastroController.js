@@ -1,36 +1,34 @@
 const cadastroModel = require("../Model/cadastroModel");
 
-// function getCad(req, res) {
-//     res.render('cadastro');
-// }
-
 async function cadastro(req, res) {
+  try {
+    const senha = String(req.body.senha);
+    const { nome, email, perfil } = req.body;
 
-  //Pegue os dados do formulário
+    // Validações de entradas
+    if (!nome || !email || !senha || !perfil) {
+      throw new Error("Todos os campos são obrigatórios.");
+    }
 
-  const senha = String(req.body.senha);
-  // const nome = String(req.body.nome);
-  // const email = String(req.body.email);
-  // const perfil = String(req.body.perfil);
-  const { nome, email, perfil } = req.body;
+    const data = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      perfil: perfil,
+    };
 
-  const data = {
-    nome: nome,
-    email: email,
-    senha: senha,
-    perfil: perfil,
-  };
+    const resp = await cadastroModel.cadastro(data);
 
-  const resp = await cadastroModel.cadastro(data);
-  console.log("Cadastrou:", resp);
-
-  if (resp.cadastro) {
-    console.log("Cadastrou com sucesso!", resp);
-    res.redirect("/login"); // Redireciona para a tela de login
-  } else {
-    const erro = resp.message;
-    console.log("Erro ao cadastrar!!!:", erro, resp);
-    res.render("cadastro", { erro });
+    if (resp.auth) {
+      console.log("Cadastrou com sucesso!", resp);
+      res.redirect("/login");
+    } else {
+      console.log("Erro ao cadastrar:", resp.message);
+      res.render("cadastro", /*{ error: resp.message, formData: req.body }*/);
+    }
+  } catch (error) {
+    console.error("Erro no cadastro:", error.message);
+    res.render("cadastro", /*{ error: "Ocorreu um erro no cadastro.", formData: req.body }*/);
   }
 }
 

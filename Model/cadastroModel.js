@@ -17,17 +17,18 @@ class Usuario {
     static async cadastro(data) {
         const { nome, email, senha, perfil } = data;
         const sql = "INSERT INTO usuario (nome, email, senha, perfil) VALUES (?, ?, ?, ?)";
-        const results = await db.query(sql, [nome, email, md5(senha), perfil]);
-    
-        if (results && results.length > 0) {
-            const id = results[0].id;
-            id = results[0].id;
-      
-            return { auth: true, user: results[0] };
-          } else {
-            return { auth: false, message: "Credenciais inválidas" };
+
+        try {
+            const results = await db.query(sql, [nome, email, md5(senha), perfil]);
+            const id = results.insertId;
+            return { auth: true, user: { id, nome, email, perfil } };
+        } catch (error) {
+            if (error.code === 'ER_DUP_ENTRY') { // Tratamento de erro de e-mail ou nome de usuário duplicado
+                return { auth: false, message: "E-mail ou nome de usuário já existem." };
+            } else {
+                throw new Error("Erro no cadastro do usuário."); // Pode personalizar a mensagem de erro conforme necessário.
+            }
         }
-        
     }
 }
 
