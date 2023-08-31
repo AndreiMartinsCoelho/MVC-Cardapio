@@ -1,26 +1,50 @@
-const mysql = require('mysql2/promise');
+const MD5 = require('md5');
 
-async function connect() {
-    if (global.connection && global.connection.state !== "disconnected") {
-        return global.connection;
+class Reset {
+  constructor(email, senha, confirmSenha) {
+    this.email = email;
+    this.senha = senha;
+    this.confirmSenha = confirmSenha;
+  }
+
+  static async changePassword(data) {
+    const { email, novaSenha, confirmSenha } = data;
+
+    try {
+      const sql =
+        "SELECT u.id_usuario id, u.nome, u.email, u.perfil " +
+        "FROM usuario u WHERE u.email = ? ";
+
+      const db = await connect();
+
+      const [results] = await db.query(sql, [email]);
+
+      if (results && results.length > 0) {
+        const id = results[0].id;
+
+        if (MD5(novaSenha) !== MD5(confirmSenha)) {
+          const result = {
+            auth: false,
+            message: "A nova senha e a confirmação de senha não coincidem.",
+          };
+          return result;
+        } else {
+          const updateSql =`UPDATE usuario SET senha = ? WHERE id_usuario = ? `;
+
+          await db.query(updateSql, [MD5(novaSenha), id]);
+
+          const result = { auth: true, user: results[0] };
+          return result;
+        }
+      } else {
+        const result = { auth: false, message: "E-mail de usuário inválido!" };
+        return result;
+      }
+    } catch (error) {
+      throw error;
     }
-
-    const connection = await mysql.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        database: "mydb"
-    });
-
-    console.log("Conectou no MySQL!");
-
-    global.connection = connection;
-    return connection;
+  }
 }
 
-async function query(sql, values) {
-    const conn = await connect();
-    const [rows] = await conn.query(sql, values);
-    return rows;
-}
+module.exports = Reset;
 
-module.exports = { query };

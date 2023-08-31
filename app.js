@@ -18,16 +18,23 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-    if (!req.session.usuario && req.originalUrl !== '/login') {
+    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha') {
         res.redirect("/login");
     } else {
-        if (req.originalUrl === '/login') {
+        if (req.originalUrl === '/login' || req.originalUrl === '/resetSenha') {
             app.set('layout', './layouts/default/login');
             res.locals.layoutVariables = {
                 url: process.env.URL,
                 img: "/images/",
                 style: "/css/",
                 title: 'login'
+            };
+            app.set('layout', './layouts/default/resetSenha');
+            res.locals.layoutVariables = {
+                url: process.env.URL,
+                img: "/images/",
+                style: "/css/",
+                title: 'reset'
             };
         } else {
             app.set('layout', './layouts/default/home');
@@ -42,7 +49,7 @@ app.use((req, res, next) => {
     }
 });
 
-//==========================ROTAS==========================
+//======================ROTAS==========================
 app.get('/home/:querry', homeController.getView );
 app.get('/home', homeController.getView);
 
@@ -54,14 +61,14 @@ app.post('/login', async (req, res)=>{
     userController.auth(req, res);
 });
 
-app.get('/reset', (req, res)=>{
-    app.set('layout', "./layouts/default/reset");
+app.get('/resetSenha', (req, res)=>{
+    app.set('layout', "./layouts/default/resetSenha");
     resetController.reset(req, res);
 });
 
-app.put('/reset', (req, res)=>{
-    resetController.reset(req, res);
-});
+app.put('/resetSenha',(req,res)=>{
+    resetController.resetPassword(req, res);
+})
 
 module.exports = app, express, expressLayouts, cors, session;
 
