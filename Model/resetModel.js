@@ -1,12 +1,5 @@
 const mysql = require("mysql");
 
-const connection = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    database: "mydb"
-});
-
-
 // Função para trocar a senha do usuário
 const changePassword = async (data) => {
   const { email, novaSenha, confirmSenha } = data;
@@ -15,7 +8,6 @@ const changePassword = async (data) => {
     const sql =
     "SELECT u.id_usuario id, u.nome, u.email, u.perfil " +
     "FROM usuario u WHERE u.email = ? ";
-
 
     // Consulta o banco de dados para obter informações do usuário
     connection.query(sql, [email], (error, results) => {

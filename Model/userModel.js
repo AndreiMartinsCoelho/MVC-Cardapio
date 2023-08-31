@@ -15,7 +15,7 @@ class Usuario {
     return await db.query(sql);
   }
 
-  static async login(data) {
+  static async auth(data) {
     const { email, senha } = data;
     const sql = `SELECT u.id_usuario as id, u.nome, u.email, u.perfil ` +
                 `FROM usuario u ` +

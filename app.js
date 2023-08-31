@@ -4,6 +4,8 @@ const cors = require('cors');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
 const userController = require('./Controller/userController');
+const resetController = require('./Controller/resetController');
+const homeController = require('./Controller/HomeController');
 
 app.use(cors());
 app.use(express.json());
@@ -15,32 +17,52 @@ app.use(session({
     secret: '4ndr31',
 }));
 
-// app.use((req, res, next) => {
-//     if (!req.session.user) {
-//         res.locals.user = req.session.user;
-//         if(req.originalUrl == '/login' || req.originalUrl == '/auth'){
-//             app.set('layout', './layouts/default/login');
-//             res.locals.layout = './layouts/default/login';
-//             next();
-//         }else{
-//             res.redirect('/login');
-//         }
-//     }else{
-//         app.set('layout', './layouts/default/home');
-//         res.locals.layout = './layouts/default/home';
-//         res.locals.user = req.session.user;
-//         next();
-//     }
-// });
+app.use((req, res, next) => {
+    if (!req.session.usuario && req.originalUrl !== '/login') {
+        res.redirect("/login");
+    } else {
+        if (req.originalUrl === '/login') {
+            app.set('layout', './layouts/default/login');
+            res.locals.layoutVariables = {
+                url: process.env.URL,
+                img: "/images/",
+                style: "/css/",
+                title: 'login'
+            };
+        } else {
+            app.set('layout', './layouts/default/home');
+            res.locals.layoutVariables = {
+                url: process.env.URL,
+                img: "/images/",
+                style: "/css/",
+                title: 'Cardapio'
+            };
+        }
+        next();
+    }
+});
 
-//Rotas da aplicação
+//==========================ROTAS==========================
+app.get('/home/:querry', homeController.getView );
+app.get('/home', homeController.getView);
+
 app.get('/login', (req, res)=>{
-    app.set('layout', "./layouts/default/login");
     userController.login(req, res);
 });
 
-app.post('/login', (req, res)=>{
+app.post('/login', async (req, res)=>{
     userController.auth(req, res);
 });
 
+app.get('/reset', (req, res)=>{
+    app.set('layout', "./layouts/default/reset");
+    resetController.reset(req, res);
+});
+
+app.put('/reset', (req, res)=>{
+    resetController.reset(req, res);
+});
+
 module.exports = app, express, expressLayouts, cors, session;
+
+   

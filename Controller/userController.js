@@ -1,35 +1,31 @@
 const userModel = require("../Model/userModel");
 
-let users = [];
+async function getUsers(req, res) {
+  users = await userModel.listarUsuarios();
+  res.render('users', { users });
+}
 
 function login(req, res) {
   res.render('login');
 }
 
 async function auth(req, res) {
-  const resp = await userModel.login({
-    email: req.body.email,
-    senha: req.body.senha
-  });
+  const { email, senha, token } = req.body;
 
-  console.log(resp);
+  const resp = await userModel.auth({ email, senha, token });
 
   if (resp.auth) {
     req.session.usuario = {
       id: resp.user.id,
-      email: resp.user.email
+      email: resp.user.email,
+      token: resp.token
     };
-    res.redirect('/tarefas');
+    res.redirect('/home');
   } else {
-    console.log('Usuário ou senha inválidos');
     res.redirect('/login');
   }
+  console.log(resp);
 }
 
-module.exports = { login, auth };
 
-
-// exports.logout = async (req, res) => {
-//   delete req.session.user();
-//   res.redirect("/ejs/home");
-// }
+module.exports = { login, auth, getUsers };
