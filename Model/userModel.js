@@ -11,7 +11,7 @@ class Usuario {
   }
 
   static async get() {
-    const sql = `SELECT *, (SELECT nome FROM usuario WHERE id=id_usuario) as nome FROM usuario u`;
+    const sql = `SELECT *,FROM usuario u`;
     return await db.query(sql);
   }
 

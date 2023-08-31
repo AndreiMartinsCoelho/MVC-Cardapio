@@ -36,11 +36,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
   `email` VARCHAR(150) NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `perfil` VARCHAR(130) NOT NULL,
-  `tipo_id_tipo` INT NOT NULL,
   PRIMARY KEY (`id_usuario`),
-  INDEX `fk_usuario_tipo1_idx` (`tipo_id_tipo` ASC),
-    FOREIGN KEY (`tipo_id_tipo`)
-    REFERENCES `mydb`.`tipo` (`id_tipo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

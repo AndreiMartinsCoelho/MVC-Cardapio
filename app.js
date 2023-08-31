@@ -6,6 +6,7 @@ const expressLayouts = require('express-ejs-layouts');
 const userController = require('./Controller/userController');
 const resetController = require('./Controller/resetController');
 const homeController = require('./Controller/HomeController');
+const cadastroController = require('./Controller/cadastroController');
 
 app.use(cors());
 app.use(express.json());
@@ -19,7 +20,7 @@ app.use(session({
 
 // Middleware de Autenticação
 app.use((req, res, next) => {
-    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha') {
+    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
         return res.redirect("/login");
     }
     
@@ -27,6 +28,8 @@ app.use((req, res, next) => {
         res.locals.layout = './layouts/default/login';
     } else if (req.originalUrl === '/resetSenha') {
         res.locals.layout = './layouts/default/resetSenha';
+    } else if (req.originalUrl === '/cadastro') {
+        res.locals.layout = './layouts/default/cadastro';
     } else {
         res.locals.layout = './layouts/default/home';
     }
@@ -54,11 +57,19 @@ app.post('/login', async (req, res)=>{
 });
 
 app.get('/resetSenha', (req, res)=>{
-    res.render('resetSenha');
+    resetController.reset(req, res);
 });
 
 app.post('/resetSenha', async (req, res) => {
     resetController.resetPassword(req, res);
+});
+
+app.get('/cadastro', (req, res)=>{
+    res.render('cadastro');
+});
+
+app.post('/cadastro', async (req, res) => {
+    cadastroController.cadastro(req, res);
 });
 
 module.exports = app;
