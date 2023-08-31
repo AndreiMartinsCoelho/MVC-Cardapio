@@ -17,36 +17,28 @@ app.use(session({
     secret: '4ndr31',
 }));
 
+// Middleware de Autenticação
 app.use((req, res, next) => {
     if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha') {
-        res.redirect("/login");
-    } else {
-        if (req.originalUrl === '/login' || req.originalUrl === '/resetSenha') {
-            app.set('layout', './layouts/default/login');
-            res.locals.layoutVariables = {
-                url: process.env.URL,
-                img: "/images/",
-                style: "/css/",
-                title: 'login'
-            };
-            app.set('layout', './layouts/default/resetSenha');
-            res.locals.layoutVariables = {
-                url: process.env.URL,
-                img: "/images/",
-                style: "/css/",
-                title: 'reset'
-            };
-        } else {
-            app.set('layout', './layouts/default/home');
-            res.locals.layoutVariables = {
-                url: process.env.URL,
-                img: "/images/",
-                style: "/css/",
-                title: 'Cardapio'
-            };
-        }
-        next();
+        return res.redirect("/login");
     }
+    
+    if (req.originalUrl === '/login') {
+        res.locals.layout = './layouts/default/login';
+    } else if (req.originalUrl === '/resetSenha') {
+        res.locals.layout = './layouts/default/resetSenha';
+    } else {
+        res.locals.layout = './layouts/default/home';
+    }
+    
+    res.locals.layoutVariables = {
+        url: process.env.URL,
+        img: "/images/",
+        style: "/css/",
+        title: 'Cardapio'
+    };
+    
+    next();
 });
 
 //======================ROTAS==========================
@@ -62,14 +54,11 @@ app.post('/login', async (req, res)=>{
 });
 
 app.get('/resetSenha', (req, res)=>{
-    app.set('layout', "./layouts/default/resetSenha");
-    resetController.reset(req, res);
+    res.render('resetSenha');
 });
 
-app.put('/resetSenha',(req,res)=>{
+app.post('/resetSenha', async (req, res) => {
     resetController.resetPassword(req, res);
-})
+});
 
-module.exports = app, express, expressLayouts, cors, session;
-
-   
+module.exports = app;

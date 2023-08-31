@@ -7,24 +7,24 @@
         <div class="logo-text">
           <h1 class="logo-text">Esqueci a senha da minha conta</h1>                  
         </div>
-          <form id="reset-form" action="/resetSenha" method="put">
+          <form id="reset-form" action="/resetSenha" method="post">
               <div class="mb-3" id="email">
                 <label for="exampleInputEmail1" for="email" class="form-label">Endereço de Email</label>
-                <input type="email" class="form-control inputEmail3" id="emailInput2" aria-describedby="emailHelp" >
+                <input type="email" class="form-control inputEmail3" id="emailInput2" aria-describedby="emailHelp" name="email" method="post">
                 <div id="emailHelp" class="form-text"><p>Nunca compartilharemos seu e-mail com mais ninguém</p></div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha Nova</label>
-                <input type="password" class="form-control inputPassword3 "id="senhaInput2">
+                <input type="password" class="form-control inputPassword3 "id="novaSenha" name="novaSenha" method="post">
               </div>
               <div class="mb-3" id="senha">
                 <label for="exampleInputPassword1" class="form-label">Confirme a Senha</label>
-                <input type="password" class="form-control inputPassword3 confirmSenhaInput "id="senhaInput2">
+                <input type="password" class="form-control inputPassword3 confirmSenhaInput "id="confirmSenha" name="confirmSenha" method="post">
               </div>
               <div class="mb-3 form-check container-senha">
-                <input type="checkbox" class="form-check-input check-senha" id="verSenha">
+                <input type="checkbox" class="form-check-input check-senha" id="verSenha" >
                 <label class="form-check-label labelSenha" for="exampleCheck1">Ver minha senha</label>
-                <a href="/ejs/login" class="esqueceuSenha">Voltar a tela de login?</a>
+                <a href="/login" class="esqueceuSenha">Voltar a tela de login?</a>
               </div>
               <button type="submit" class="btn btn-login">TROCAR SENHA</button>
               <p id="erroMEN" class="erroMSG"></p>
