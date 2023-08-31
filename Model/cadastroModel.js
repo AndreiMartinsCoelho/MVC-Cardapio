@@ -19,12 +19,12 @@ class Usuario {
         const sql = "INSERT INTO usuario (nome, email, senha, perfil) VALUES (?, ?, ?, ?)";
         const results = await db.query(sql, [nome, email, md5(senha), perfil]);
     
-        if (results) {
-      
-            console.log("Fez Cadastrou um novo usuário!");
+        if (results && results.length > 0) {
+            const id = results[0].id;
+            id = results[0].id;
       
             return { auth: true, user: results[0] };
-        } else {
+          } else {
             return { auth: false, message: "Credenciais inválidas" };
         }
         

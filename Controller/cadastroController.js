@@ -5,7 +5,13 @@ const cadastroModel = require("../Model/cadastroModel");
 // }
 
 async function cadastro(req, res) {
+
+  //Pegue os dados do formulário
+
   const senha = String(req.body.senha);
+  // const nome = String(req.body.nome);
+  // const email = String(req.body.email);
+  // const perfil = String(req.body.perfil);
   const { nome, email, perfil } = req.body;
 
   const data = {
