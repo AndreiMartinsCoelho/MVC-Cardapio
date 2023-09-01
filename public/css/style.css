@@ -245,3 +245,75 @@
     padding: 7px 0!important;
     text-align: center!important;
 }
+
+.cardapio-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .cardapio-list li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  .cardapio-list li img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+  }
+  
+  .cardapio-list li strong.categoria {
+    color: #ff5722;
+  }
+  
+  .cardapio-list li strong {
+    font-weight: bold;
+  }
+  
+  .cardapio-list li strong::after {
+    margin-right: 5px;
+  }
+  .cardapio-list li img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+.criar button{
+    text-decoration: none!important;
+    border-radius: 10px;
+    margin: 10px!important;
+    color: white!important;
+    font-size: 16pt!important;
+    font-weight: bolder!important;
+    padding: 8px!important;
+    background-color: red;
+    border: none;
+    width: 20%;
+    height: 20%;
+}
+
+.btn-excluir{
+    text-decoration: none!important;
+    border-radius: 10px;
+    margin: 10px!important;
+    color: red!important;
+    font-size: 16pt!important;
+    font-weight: bolder!important;
+    padding: 5px!important;
+    background-color: white;
+    border: none;
+    border: solid 3px black;
+}
+
+.btn-excluir svg{
+    width: 3vw!important;
+    height: 3vh!important;
+}

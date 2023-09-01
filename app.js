@@ -21,7 +21,7 @@ app.use(session({
     secret: '4ndr31',
 }));
 
-//===============Middleware de Autenticação===================
+//===============Middleware de Autenticação==================================
 app.use((req, res, next) => {
     if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
         return res.redirect("/login");
@@ -48,13 +48,34 @@ app.use((req, res, next) => {
     next();
 });
 
-//======================ROTAS==========================
-app.get('/home/:query', homeController.getView );
-app.get('/home', homeController.getView);
+//=================================ROTAS=====================================
+app.get('/home', homeController.getHomePage);
+//=======================Cadastro de cardapios===============================
 app.get('/cardapios', cardapioController.getCardapios)
-app.get('/cardapio/:id_cardapio', cardapioController.getCardapio);
+//===========================Edição de cardapio=======================
+
+// Rota para renderizar a página de edição de cardápio
+app.get('/cardapio/editar/:id', cardapioController.getEditarCardapio);
+
+// Rota para processar a edição de cardápio
+app.post('/cardapio/editar/:id', cardapioController.postEditarCardapio);
+
+app.post('/cardapio/delete/:id', cardapioController.postExcluirCardapio);
+//===========================Cadastro de cardapios===========================
 app.post('/cardapios', cardapioController.addCardapio);
+//===========================Edição de cardapios=============================
 app.get('/cardapio/:query', cardapioController.getCardapios);
+
+//============================ROTA DE EXCLUIR================================
+app.post('/cardapio/delete/:id_cardapio', async (req, res) => {
+    const { id_cardapio } = req.params;
+    try {
+      await cardapioController.excluirCardapio(id_cardapio);
+      res.redirect('/cardapios');
+    } catch (error) {
+      res.status(500).send('Erro ao excluir o cardápio');
+    }
+  });
 
 app.get('/login', (req, res)=>{
     userController.login(req, res);
