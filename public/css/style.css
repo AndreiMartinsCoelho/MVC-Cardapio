@@ -119,7 +119,13 @@
     display: flex!important;
 }
 
-.btn-welcome{
+.label-img{
+    color: black!important;
+    font-size: 14pt!important;
+    font-weight: bolder;
+}
+
+.btn-car{
     border: none!important;
     outline: none!important;
     background-color: red!important;
@@ -219,14 +225,6 @@
     color: red!important;
     padding: 10px!important;
     text-align: center!important;
-}
-
-.erroMSG, #erroMENL, #erroMSEN, #MSGW{
-    font-size: 16pt;
-    font-weight: 900;
-    color: red;
-    text-align: center;
-    padding: 10px;
 }
 
 .deslogar{

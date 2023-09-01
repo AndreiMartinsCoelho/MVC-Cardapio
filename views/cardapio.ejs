@@ -1,52 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <link rel="shortcut icon" href="/images/favicon_32x32.png">
-    <link rel="stylesheet" href="css/style.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  </head>
-  <body>
-    <main>
-      <%- body %>
-    </main>
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-auto">
-                    <form action="/cardapios" method="post">
-                        <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Nome do prato</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                          <label for="exampleInputPassword1" class="form-label">Tempo de praparo</label>
-                          <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Descrição do prato</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Valor do prato</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="inputGroupFile02">
-                            <label class="input-group-text" for="inputGroupFile02">imagem do prato</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Categoria do prato</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
+<div class="container-fluid">
+  <div class="row container-login test">
+    <div class="col-sm-auto">
+      <div class="logo-text">
+        <h1 class="logo-text">Bem vindo! Cadastro de cardapios</h1>
+      </div>
+      <form action="/cardapios" method="post">
+        <div class="mb-3">
+          <label for="nome_prato" class="form-label">Nome do prato</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome_prato"
+            name="nome_prato"
+            aria-describedby="emailHelp"
+          />
         </div>
+        <div class="mb-3">
+          <label for="tempo_preparo" class="form-label">Tempo de preparo</label>
+          <input
+            type="time"
+            class="form-control"
+            id="tempo_preparo"
+            name="tempo_preparo"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="descricao_prato" class="form-label"
+            >Descrição do prato</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="descricao_prato"
+            name="descricao_prato"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="valor_prato" class="form-label">Valor do prato</label>
+          <input
+            type="number"
+            class="form-control"
+            id="valor_prato"
+            name="valor_prato"
+          />
+        </div>
+        <div class="input mb-3">
+          <label for="imagem" class="form-label">Imagem do prato</label>
+          <input
+            type="file"
+            class="form-control"
+            id="inputGroupFile02"
+            name="img_prato"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="categoria" class="form-label">Categoria do prato</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoria"
+            name="categoria"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary btn-car">CADASTRAR CARDAPIO</button>
+      </form>
     </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-</html>
+  </div>
+</div>

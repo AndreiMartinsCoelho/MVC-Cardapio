@@ -22,38 +22,38 @@ app.use(session({
 }));
 
 //===============Middleware de Autenticação===================
-// app.use((req, res, next) => {
-//     if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
-//         return res.redirect("/login");
-//     }
-//     if (req.originalUrl === '/login') {
-//         res.locals.layout = './layout/default/login';
-//     } else if (req.originalUrl === '/resetSenha') {
-//         res.locals.layout = './layout/default/resetSenha';
-//     } else if (req.originalUrl === '/cadastro') {
-//         res.locals.layout = './layout/default/cadastro';
-//     } else {
-//         res.locals.layout = './layout/default/home';
-//     } if (req.originalUrl === '/cardapios') {
-//         res.locals.layout = './layout/default/cardapios';
-//     }
-//     app.set('layout', './layout/default/home');
-//     res.locals.layoutVariables = {
-//         url: process.env.URL,
-//         img: "/images/",
-//         style: "/css/",
-//         title: 'Cardapios',
-//         user: req.session.usuario,
-//     };
-//     next();
-// });
+app.use((req, res, next) => {
+    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
+        return res.redirect("/login");
+    }
+    if (req.originalUrl === '/login') {
+        res.locals.layout = './layout/default/login';
+    } else if (req.originalUrl === '/resetSenha') {
+        res.locals.layout = './layout/default/resetSenha';
+    } else if (req.originalUrl === '/cadastro') {
+        res.locals.layout = './layout/default/cadastro';
+    } else {
+        res.locals.layout = './layout/default/home';
+    } if (req.originalUrl === '/cardapios') {
+        res.locals.layout = './layout/default/cardapio';
+    }
+    app.set('layout', './layout/default/home');
+    res.locals.layoutVariables = {
+        url: process.env.URL,
+        img: "/images/",
+        style: "/css/",
+        title: 'Cardapios',
+        user: req.session.usuario,
+    };
+    next();
+});
 
 //======================ROTAS==========================
-app.get('/home/:querry', homeController.getView );
+app.get('/home/:query', homeController.getView );
 app.get('/home', homeController.getView);
 app.get('/cardapios', cardapioController.getCardapios)
 app.get('/cardapio/:id_cardapio', cardapioController.getCardapio);
-app.post('/cardapio', cardapioController.addCardapio);
+app.post('/cardapios', cardapioController.addCardapio);
 app.get('/cardapio/:query', cardapioController.getCardapios);
 
 app.get('/login', (req, res)=>{

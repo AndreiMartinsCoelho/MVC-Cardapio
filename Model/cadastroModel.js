@@ -17,7 +17,6 @@ class Usuario {
     static async cadastro(data) {
         const { nome, email, senha, perfil } = data;
         const sql = "INSERT INTO usuario (nome, email, senha, perfil) VALUES (?, ?, ?, ?)";
-
         try {
             const results = await db.query(sql, [nome, email, md5(senha), perfil]);
             const id = results.insertId;
