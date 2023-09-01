@@ -3,10 +3,13 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
+
+//========================Controladores da requisição============================
 const userController = require('./Controller/userController');
 const resetController = require('./Controller/resetController');
 const homeController = require('./Controller/HomeController');
 const cadastroController = require('./Controller/cadastroController');
+const cardapioController = require('./Controller/cardapioController');
 
 app.use(cors());
 app.use(express.json());
@@ -18,35 +21,40 @@ app.use(session({
     secret: '4ndr31',
 }));
 
-// Middleware de Autenticação
-app.use((req, res, next) => {
-    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
-        return res.redirect("/login");
-    }
-    
-    if (req.originalUrl === '/login') {
-        res.locals.layout = './layouts/default/login';
-    } else if (req.originalUrl === '/resetSenha') {
-        res.locals.layout = './layouts/default/resetSenha';
-    } else if (req.originalUrl === '/cadastro') {
-        res.locals.layout = './layouts/default/cadastro';
-    } else {
-        res.locals.layout = './layouts/default/home';
-    }
-    
-    res.locals.layoutVariables = {
-        url: process.env.URL,
-        img: "/images/",
-        style: "/css/",
-        title: 'Cardapio'
-    };
-    
-    next();
-});
+//===============Middleware de Autenticação===================
+// app.use((req, res, next) => {
+//     if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
+//         return res.redirect("/login");
+//     }
+//     if (req.originalUrl === '/login') {
+//         res.locals.layout = './layout/default/login';
+//     } else if (req.originalUrl === '/resetSenha') {
+//         res.locals.layout = './layout/default/resetSenha';
+//     } else if (req.originalUrl === '/cadastro') {
+//         res.locals.layout = './layout/default/cadastro';
+//     } else {
+//         res.locals.layout = './layout/default/home';
+//     } if (req.originalUrl === '/cardapios') {
+//         res.locals.layout = './layout/default/cardapios';
+//     }
+//     app.set('layout', './layout/default/home');
+//     res.locals.layoutVariables = {
+//         url: process.env.URL,
+//         img: "/images/",
+//         style: "/css/",
+//         title: 'Cardapios',
+//         user: req.session.usuario,
+//     };
+//     next();
+// });
 
 //======================ROTAS==========================
 app.get('/home/:querry', homeController.getView );
 app.get('/home', homeController.getView);
+app.get('/cardapios', cardapioController.getCardapios)
+app.get('/cardapio/:id_cardapio', cardapioController.getCardapio);
+app.post('/cardapio', cardapioController.addCardapio);
+app.get('/cardapio/:query', cardapioController.getCardapios);
 
 app.get('/login', (req, res)=>{
     userController.login(req, res);
