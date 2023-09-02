@@ -246,17 +246,17 @@
     text-decoration: none!important;
     border-radius: 10px;
     margin: 10px!important;
-    color: white!important;
-    font-size: 16pt!important;
+    color: #ffffff!important;
+    font-size: 10pt!important;
     font-weight: bolder!important;
     padding: 8px!important;
     background-color: red;
     border: none;
-    width: 20%;
-    height: 20%;
+    width: 150px;
+    height: 50px;
 }
 
-.btn-excluir{
+.btn-excluir {
     text-decoration: none!important;
     border-radius: 10px;
     margin: 10px!important;
@@ -267,16 +267,39 @@
     background-color: white;
     border: none;
     border: solid 3px black;
+    width: 60px!important;
 }
 
 .btn-excluir svg{
-    width: 3vw!important;
-    height: 3vh!important;
+    width: 25px!important;
+    height: 25px!important;
+}
+
+.btn-edit{
+    border-radius: 10px!important;
+    text-decoration: none!important;
+    border: none!important;
+    margin: 10px!important;
+    color: white!important;
+    font-size: 16pt!important;
+    font-weight: bolder!important;
+    padding: 5px!important;
+    background-color: red!important;
+    width: 60px!important;
+}
+
+.btn-edit svg{
+    width: 25px!important;
+    height: 25px!important;
+}
+
+.btns{
+    display: flex!important;
 }
 
 .deslogar svg{
-    width: 5vw!important;
-    height: 5vh!important;
+    width: 4vw!important;
+    height: 4vh!important;
 }
 
 .deslogar{

@@ -6,7 +6,7 @@ const expressLayouts = require('express-ejs-layouts');
 
 //========================Controladores da requisição============================
 const userController = require('./Controller/userController');
-const resetController = require('./Controller/resetController');
+// const resetController = require('./Controller/resetController');
 const homeController = require('./Controller/HomeController');
 const cadastroController = require('./Controller/cadastroController');
 const cardapioController = require('./Controller/cardapioController');
@@ -23,13 +23,13 @@ app.use(session({
 
 //===============Middleware de Autenticação==================================
 app.use((req, res, next) => {
-    if (!req.session.usuario && req.originalUrl !== '/login' && req.originalUrl !== '/resetSenha' && req.originalUrl !== '/cadastro') {
+    if (!req.session.usuario && req.originalUrl !== '/login' /*&& req.originalUrl !== '/resetSenha'*/ && req.originalUrl !== '/cadastro') {
         return res.redirect("/login");
     }
     if (req.originalUrl === '/login') {
         res.locals.layout = './layout/default/login';
     } else if (req.originalUrl === '/resetSenha') {
-        res.locals.layout = './layout/default/resetSenha';
+        // res.locals.layout = './layout/default/resetSenha';
     } else if (req.originalUrl === '/cadastro') {
         res.locals.layout = './layout/default/cadastro';
     } else {
@@ -86,13 +86,13 @@ app.post('/login', async (req, res)=>{
     userController.auth(req, res);
 });
 
-app.get('/resetSenha', (req, res)=>{
-    resetController.reset(req, res);
-});
+// app.get('/resetSenha', (req, res)=>{
+//     resetController.reset(req, res);
+// });
 
-app.post('/resetSenha', async (req, res) => {
-    resetController.resetPassword(req, res);
-});
+// app.post('/resetSenha', async (req, res) => {
+//     resetController.resetPassword(req, res);
+// });
 
 app.get('/cadastro', (req, res)=>{
     res.render('cadastro');
