@@ -34,4 +34,10 @@ async function auth(req, res) {
   console.log(resp);
 }
 
-module.exports = { login, auth, getUsers };
+async function deslogar(req, res) {
+  // Remova a sessão do usuário usando delete
+  delete req.session.usuario;
+  res.redirect('/login');
+}
+
+module.exports = { login, auth, getUsers, deslogar };

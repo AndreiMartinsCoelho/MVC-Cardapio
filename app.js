@@ -67,6 +67,7 @@ app.post('/cardapios', cardapioController.addCardapio);
 app.get('/cardapio/:query', cardapioController.getCardapios);
 
 //============================ROTA DE EXCLUIR================================
+//rota para excluir cardapio{teste}
 app.post('/cardapio/delete/:id_cardapio', async (req, res) => {
     const { id_cardapio } = req.params;
     try {
@@ -99,6 +100,10 @@ app.get('/cadastro', (req, res)=>{
 
 app.post('/cadastro', async (req, res) => {
     cadastroController.cadastro(req, res);
+});
+
+app.get('/logout', (req, res) => {
+    userController.deslogar(req, res);
 });
 
 module.exports = app;
