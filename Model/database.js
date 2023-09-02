@@ -6,9 +6,10 @@ async function connect() {
     }
 
     const connection = await mysql.createConnection({
-        host: "127.0.0.1",
-        user: "root",
-        database: "mydb"
+        host: "sql10.freemysqlhosting.net",
+        user: "sql10643902",
+        database: "sql10643902",
+        password:"H1jmUWjtjN"
     });
 
     console.log("Conectou no MySQL!");
