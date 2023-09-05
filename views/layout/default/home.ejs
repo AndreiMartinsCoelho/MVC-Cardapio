@@ -22,8 +22,8 @@
         <div class="row container-login test">
           <div class="col-sm-auto">
             <ul class="cardapio-list">
-            <% if( cardapios.length>0 && cardapios) { %>
-              <% cardapios.forEach((cardapio) => { %>
+            <% if( cardapio.length > 0 && cardapio ) { %>
+              <% cardapio.forEach((cardapio) => { %>
               <li>
                 <strong>Nome do Prato:</strong> <%= cardapio.nome_prato %><br />
                 <strong>Tempo de Preparo:</strong> <%= cardapio.tempo_preparo %><br />
@@ -55,7 +55,7 @@
             </ul>
           </div>
         </div>
-      </div>      
+      </div>
     </main>
   </body>
   <script

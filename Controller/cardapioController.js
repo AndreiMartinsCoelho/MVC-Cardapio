@@ -1,11 +1,16 @@
 const cardapioModel = require("../Model/cardapioModel");
 
-let cardapios = [];
+let cardapio = [];
 
 //============================CARREGA O LAYOUT DO CARDAPIO=================================================
 async function getCardapios(req, res) {
-  const cardapio = await cardapioModel.listaCardapios();
-  res.render("cardapio", { cardapio }); // Passando os cardápios para a renderização
+  try {
+    const cardapiosData = await cardapioModel.listaCardapios();
+    res.render("cardapio", { cardapios: cardapiosData });
+  } catch (error) {
+    console.error("Erro ao carregar cardápios:", error);
+    res.status(500).send("Erro ao carregar cardápios.");
+  }
 }
 
 //============================CARREGA TODOS CARDAPIO=================================================
@@ -95,19 +100,19 @@ async function postEditarCardapio(req, res) {
   const { id } = req.params;
   const { nome_prato, tempo_preparo, descricao_prato, valor_prato, categoria } = req.body;
   try {
-      const newData = {
-          nome_prato,
-          tempo_preparo,
-          descricao_prato,
-          valor_prato,
-          categoria,
-      };
+    const newData = {
+      nome_prato,
+      tempo_preparo,
+      descricao_prato,
+      valor_prato,
+      categoria,
+    };
 
-      await cardapioModel.editarCardapio(id, newData);
+    await cardapioModel.editarCardapio(id, newData);
 
-      res.redirect('/cardapios');
+    res.redirect('/home');
   } catch (error) {
-      res.status(500).send('Erro ao editar o cardápio.');
+    res.status(500).send('Erro ao editar o cardápio.');
   }
 }
 
