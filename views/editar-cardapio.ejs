@@ -1,26 +1,71 @@
-<div class="container">
-    <h1>Editar Cardápio</h1>
-    <form action="/cardapio/editar/<%= cardapio.id_cardapio %>" method="post">
+<div class="container-fluid">
+  <div class="row container-login test1">
+    <div class="col-sm-auto test1">
+        <div class="logo-text">
+            <h1 class="logo-text">Bem vindo a tela ediçoes! Edição de cardapio pronto para fazer alteraçoes na hora</h1>
+        </div>
+      <form action="/cardapio/editar/<%= cardapio.id_cardapio %>" method="post" style="justify-content: center!important;
+        align-items: center!important;">
         <div class="mb-3">
-            <label for="nome_prato" class="form-label">Nome do Prato</label>
-            <input type="text" class="form-control" id="nome_prato" name="nome_prato" value="<%= cardapio.nome_prato %>" required>
+          <label for="nome_prato" class="form-label">Nome do Prato</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nome_prato"
+            name="nome_prato"
+            value="<%= cardapio.nome_prato %>"
+            required
+          />
         </div>
         <div class="mb-3">
-            <label for="tempo_preparo" class="form-label">Tempo de Preparo</label>
-            <input type="time" class="form-control" id="tempo_preparo" name="tempo_preparo" value="<%= cardapio.tempo_preparo %>" required>
+          <label for="tempo_preparo" class="form-label">Tempo de Preparo</label>
+          <input
+            type="time"
+            class="form-control"
+            id="tempo_preparo"
+            name="tempo_preparo"
+            value="<%= cardapio.tempo_preparo %>"
+
+          />
         </div>
         <div class="mb-3">
-            <label for="descricao_prato" class="form-label">Descrição do Prato</label>
-            <textarea class="form-control" id="descricao_prato" name="descricao_prato" rows="4" required><%= cardapio.descricao_prato %></textarea>
+          <label for="descricao_prato" class="form-label"
+            >Descrição do Prato</label
+          >
+          <input
+            class="form-control"
+            id="descricao_prato"
+            name="descricao_prato"
+            value="<%= cardapio.descricao_prato %>"
+          />
         </div>
         <div class="mb-3">
-            <label for="valor_prato" class="form-label">Valor do Prato</label>
-            <input type="number" class="form-control" id="valor_prato" name="valor_prato" value="<%= cardapio.valor_prato %>" required>
+          <label for="valor_prato" class="form-label">Valor do Prato</label>
+          <input
+            type="number"
+            class="form-control"
+            id="valor_prato"
+            name="valor_prato"
+            value="<%= cardapio.valor_prato %>"
+            required
+          />
         </div>
         <div class="mb-3">
-            <label for="categoria" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="categoria" name="categoria" value="<%= cardapio.categoria %>" required>
+          <label for="categoria" class="form-label">Categoria</label>
+          <input
+            type="text"
+            class="form-control"
+            id="categoria"
+            name="categoria"
+            value="<%= cardapio.categoria %>"
+            required
+          />
         </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+        <button type="submit" class="btn btn-primary" class="btn-edit">Salvar Edição</button>
+      </form>
+      <div id="cadastro">
+        <a href="/home">Deseja voltar para a home?</a>
+      </div>
+    </div>
+  </div>
 </div>
