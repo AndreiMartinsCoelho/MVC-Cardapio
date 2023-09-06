@@ -36,6 +36,8 @@ app.use((req, res, next) => {
         res.locals.layout = './layout/default/home';
     } if (req.originalUrl === '/cardapios') {
         res.locals.layout = './layout/default/cardapio';
+    } else if (req.originalUrl === '/cardapio/editar/:id') {
+        res.locals.layout = './layout/default/editar-cardapio';
     }
     app.set('layout', './layout/default/home');
     res.locals.layoutVariables = {
@@ -44,7 +46,14 @@ app.use((req, res, next) => {
         style: "/css/",
         title: 'Cardapios',
         user: req.session.usuario,
-    };
+    },
+    res.locals.layoutVariables = {
+        url: process.env.URL,
+        img: "/images/",
+        style: "/css/",
+        title: 'Editar Cardapio',
+        user: req.session.usuario,
+    }
     next();
 });
 
