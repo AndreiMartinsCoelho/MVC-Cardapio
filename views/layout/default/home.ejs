@@ -25,12 +25,12 @@
             <% if( cardapio.length > 0 && cardapio ) { %>
               <% cardapio.forEach((cardapio) => { %>
               <li>
-                <strong>Nome do Prato:</strong> <%= cardapio.nome_prato %><br />
-                <strong>Tempo de Preparo:</strong> <%= cardapio.tempo_preparo %><br />
-                <strong>Descrição do Prato:</strong> <%= cardapio.descricao_prato %><br />
-                <strong>Valor do Prato:</strong> R$ <%= cardapio.valor_prato %><br />
-                <strong class="categoria">Categoria:</strong> <%= cardapio.categoria %><br />
-                <strong>Imagem:</strong><img src="<%= cardapio.img_prato %>"><br />
+                <strong>Nome do Prato:</strong> <%= cardapio.nome_prato %><br/>
+                <strong>Tempo de Preparo:</strong> <%= cardapio.tempo_preparo %><br/>
+                <strong>Descrição do Prato:</strong> <%= cardapio.descricao_prato %><br/>
+                <strong>Valor do Prato:</strong> R$ <%= cardapio.valor_prato %><br/>
+                <strong class="categoria">Categoria:</strong> <%= cardapio.categoria %><br/>
+                <img src="/img/<%= cardapio.img_prato %>">
                 <div class="btns"> 
                   <a href="/cardapio/editar/<%= cardapio.id_cardapio %>" class="btn btn-primary btn-edit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

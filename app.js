@@ -3,6 +3,7 @@ const session = require('express-session');
 const cors = require('cors');
 const app = express();
 const expressLayouts = require('express-ejs-layouts');
+const multer = require('multer');
 
 //========================Controladores da requisição============================
 const userController = require('./Controller/userController');
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static('public'));
+app.use('/img', express.static(__dirname + '/img'));
 app.use(express.urlencoded({ extended: true }));
 app.use(expressLayouts);
 app.use(session({
@@ -57,13 +59,22 @@ app.use((req, res, next) => {
     next();
 });
 
+const storage = multer.diskStorage({
+    destination: './img',
+    filename: (req, file, cb) => { 
+      const hash = Math.random().toString(36).substring(7);
+      const filename = `${hash}_${file.originalname}`;
+      cb(null, filename);
+    }
+});
+  
+const upload = multer({ storage });
+
 //=================================ROTAS=====================================
 app.get('/home', homeController.getHomePage);
 //=======================Cadastro de cardapios===============================
 app.get('/cardapios', cardapioController.getCardapios)
 //===========================Edição de cardapio=======================
-
-// Rota para renderizar a página de edição de cardápio
 app.get('/cardapio/editar/:id', cardapioController.getEditarCardapio);
 
 // Rota para processar a edição de cardápio
@@ -71,12 +82,12 @@ app.post('/cardapio/editar/:id', cardapioController.postEditarCardapio);
 
 app.post('/cardapio/delete/:id', cardapioController.postExcluirCardapio);
 //===========================Cadastro de cardapios===========================
-app.post('/cardapios', cardapioController.addCardapio);
+app.post('/cardapios', upload.single('img_prato'), cardapioController.addCardapio);
+  
 //===========================Edição de cardapios=============================
 app.get('/cardapio/:query', cardapioController.getCardapios);
 
 //============================ROTA DE EXCLUIR================================
-//rota para excluir cardapio{teste}
 app.post('/cardapio/delete/:id_cardapio', async (req, res) => {
     const { id_cardapio } = req.params;
     try {
@@ -85,7 +96,7 @@ app.post('/cardapio/delete/:id_cardapio', async (req, res) => {
     } catch (error) {
       res.status(500).send('Erro ao excluir o cardápio');
     }
-  });
+});
 
 app.get('/login', (req, res)=>{
     userController.login(req, res);

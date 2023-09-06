@@ -1,6 +1,16 @@
 const cardapioModel = require("../Model/cardapioModel");
+const MULTER = require('multer');
 
-let cardapio = [];
+const storage = MULTER.diskStorage({
+  destination: './img', filename: (req, file, cb) => { 
+    const hash = Math.random().toString(36).substring(7);
+    const filename = `${hash}_${file.originalname}`;
+    cb(null, filename);  // função cb
+  }
+});
+
+//Previe algum erro(medo de remover e dar erro :) )
+const upload = MULTER({ storage });
 
 //============================CARREGA O LAYOUT DO CARDAPIO=================================================
 async function getCardapios(req, res) {
@@ -27,9 +37,14 @@ async function getCardapio(req, res) {
 
 //=======================Cadastro de cardapio================================
 async function addCardapio(req, res) {
-
-  if(!req.body.nome_prato || !req.body.tempo_preparo || !req.body.descricao_prato || !req.body.valor_prato || !req.body.img_prato || !req.body.categoria){
-    throw new Error("Todos os campos são obrigatórios.");
+  if (
+    !req.body.nome_prato ||
+    !req.body.tempo_preparo ||
+    !req.body.descricao_prato ||
+    !req.body.valor_prato ||
+    !req.body.categoria
+  ) {
+    throw new Error('Todos os campos são obrigatórios.');
   }
 
   const {
@@ -37,36 +52,35 @@ async function addCardapio(req, res) {
     tempo_preparo,
     descricao_prato,
     valor_prato,
-    img_prato,
     categoria,
   } = req.body;
 
-  console.log("req.body", req.body);
+  if (req.file) {
+    const img_prato = req.file.filename;
+    try {
+      const data = await cardapioModel.cadastrarCardapio({
+        nome_prato,
+        tempo_preparo,
+        descricao_prato,
+        valor_prato,
+        img_prato,
+        categoria,
+      });
 
-  try {
-    const data = await cardapioModel.cadastrarCardapio({
-      nome_prato,
-      tempo_preparo,
-      descricao_prato,
-      valor_prato,
-      img_prato,
-      categoria,
-    });
-
-    // console.log("data", data);
-
-    if (data.auth) {
-      //Cadastro realizado com sucesso
-      res.redirect("/home");
-    } else {
-      // Ocorreu um erro no cadastro
-      console.log("Erro no cadastro do cardapio.", data);
+      if (data.auth) {
+        // Cadastro realizado com sucesso
+        res.redirect('/home');
+      } else {
+        // Ocorreu um erro no cadastro
+        console.log('Erro no cadastro do cardapio.', data);
+      }
+    } catch (error) {
+      console.error('Erro no cadastro do cardapio:', error);
+      throw error;
     }
-  } catch (error) {
-    console.error("Erro no cadastro do cardapio:", error);
-    throw error;
   }
 }
+
 
 // Função para processar a exclusão de um cardápio específico
 async function postExcluirCardapio(req, res) {
