@@ -1,13 +1,17 @@
 const cadastroModel = require("../Model/cadastroModel");
 
 async function cadastro(req, res) {
+
+  let erro = false;
+
   try {
     const senha = String(req.body.senha);
     const { nome, email, perfil } = req.body;
 
-    // Validações de entradas
     if (!nome || !email || !senha || !perfil) {
-      throw new Error("Todos os campos são obrigatórios.");
+      erro = "Preencha todos os campos!";
+      res.render("cadastro", { erro });
+      return;
     }
 
     const data = {
@@ -23,8 +27,9 @@ async function cadastro(req, res) {
       console.log("Cadastrou com sucesso!", resp);
       res.redirect("/login");
     } else {
-      console.log("Erro ao cadastrar:", resp.message);
-      res.render("cadastro", /*{ error: resp.message, formData: req.body }*/);
+      erro = "Email já cadastrado!"
+      res.render("cadastro", { erro });
+      return;
     }
   } catch (error) {
     console.error("Erro no cadastro:", error.message);

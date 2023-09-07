@@ -327,3 +327,39 @@
     align-items: center!important;
     flex-direction: column!important;
 }
+
+#alert-danger{
+    width: 300px;
+    display: flex;
+    background-color: red;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#alert-danger p{
+    font-size: 14pt!important;
+    font-weight: bolder!important;
+    color: white!important;
+    text-align: center!important;
+    width: 100%!important;
+    margin: 0!important;
+    padding: 10px;
+}
+
+main{
+    display: flex!important;
+    flex-direction: column!important;
+    justify-content: center!important;
+    align-items: center!important;
+}
+
+.fade-out {
+    transition: opacity 1s;
+  }
+  
+  .fade-out.hidden {
+    opacity: 0;
+  }

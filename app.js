@@ -99,7 +99,8 @@ app.post('/cardapio/delete/:id_cardapio', async (req, res) => {
 });
 
 app.get('/login', (req, res)=>{
-    userController.login(req, res);
+    userController.login(req, res,);
+    res.render('login', {erro: false});
 });
 
 app.post('/login', async (req, res)=>{
@@ -115,7 +116,7 @@ app.post('/login', async (req, res)=>{
 // });
 
 app.get('/cadastro', (req, res)=>{
-    res.render('cadastro');
+    res.render('cadastro', {erro: false});
 });
 
 app.post('/cadastro', async (req, res) => {

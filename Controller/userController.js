@@ -3,17 +3,22 @@ const userModel = require("../Model/userModel");
 async function getUsers(req, res) {
   users = await userModel.listarUsuarios();
   res.render('users', { users });
+  return;
 }
 
 function login(req, res) {
   res.render('login');
+  return;
 }
 
 async function auth(req, res) {
 
+  let erro = false;
+
   if (!req.body.email || !req.body.senha) {
-    erro = "Credenciais inválidas";
-    res.redirect('/login');
+    erro = "Preencha todos os campos!";
+    res.render('login', { erro });
+    return;
   }
 
   const { email, senha, token } = req.body;
@@ -28,8 +33,9 @@ async function auth(req, res) {
     };
     res.redirect('/home');
   } else {
-    erro = resp.message;
-    res.redirect('/login');
+    erro = "Credenciais inválidas";
+    res.render('login', { erro });
+    return;
   }
   console.log(resp);
 }
