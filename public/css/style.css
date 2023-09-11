@@ -207,15 +207,18 @@
     padding: 0;
     width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
   }
   
   .cardapio-list li {
-    margin-bottom: 20px;
+    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     border-radius: 5px;
+    margin: 10px;
   }
   
   .cardapio-list li img {
@@ -344,13 +347,6 @@
     padding: 10px;
 }
 
-main{
-    display: flex!important;
-    flex-direction: column!important;
-    justify-content: center!important;
-    align-items: center!important;
-}
-
 .fade-out {
     transition: opacity 1s;
   }
@@ -360,12 +356,6 @@ main{
   }
 
 .image{
-    width: 300px;
-    height: 300px;
-}
-
-.neymar{
-    width: 100%!important;
-    display: flex!important;
-    flex-direction: column!important;
+    width: 700px;
+    height: 700px;
 }
