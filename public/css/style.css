@@ -205,6 +205,9 @@
 .cardapio-list {
     list-style: none;
     padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   .cardapio-list li {
@@ -232,14 +235,6 @@
   
   .cardapio-list li strong::after {
     margin-right: 5px;
-  }
-  .cardapio-list li img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
   }
   
 .criar button{
@@ -363,3 +358,14 @@ main{
   .fade-out.hidden {
     opacity: 0;
   }
+
+.image{
+    width: 300px;
+    height: 300px;
+}
+
+.neymar{
+    width: 100%!important;
+    display: flex!important;
+    flex-direction: column!important;
+}
